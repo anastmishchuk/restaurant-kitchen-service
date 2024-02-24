@@ -1,5 +1,8 @@
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect
+from django.views import generic
 
 from restaurant.models import Cook, Dish, DishType
 
@@ -24,3 +27,20 @@ def index(request):
 
     return render(request, "restaurant/index.html", context=context)
 
+
+class DishTypeListView(LoginRequiredMixin, generic.ListView):
+    model = DishType
+    context_object_name = "dish_type_list"
+    template_name = "restaurant/dish_type_list.html"
+    paginate_by = 5
+
+
+class DishListView(LoginRequiredMixin, generic.ListView):
+    model = Dish
+    paginate_by = 5
+    queryset = Dish.objects.all().select_related("dish_type")
+
+
+class CookListView(LoginRequiredMixin, generic.ListView):
+    model = Cook
+    paginate_by = 5
