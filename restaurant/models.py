@@ -37,7 +37,7 @@ class Dish(models.Model):
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     dish_type = models.ForeignKey(DishType, on_delete=models.CASCADE)
-    cooks = models.ManyToManyField(Cook, related_name="cooks")
+    cooks = models.ManyToManyField(Cook, related_name="dishes")
 
     class Meta:
         verbose_name = "dish"
