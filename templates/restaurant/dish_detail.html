@@ -1,17 +1,41 @@
-{% extends "base.html" %}
+{% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
 {% block content %}
-  <h1>
-    {{ dish.name }}
-    <a href="{% url 'restaurant:dish-delete' pk=dish.id %}" class="btn btn-danger link-to-page">
-      Delete
-    </a>
 
-    <a href="{% url 'restaurant:dish-update' pk=dish.id %}" class="btn btn-secondary link-to-page">
-      Update
-    </a>
-  </h1>
-  <p>Dish type: {{ dish.dish_type.name }}</p>
+  <header class="bg-gradient-dark">
+    <div class="page-header" style="background-image: url('{{ ASSETS_ROOT }}/img/dish_list.jpg'); min-height: 40vh;">
+      <span class="mask bg-gradient-dark opacity-6"></span>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center mx-auto my-auto">
+            <h1 class="text-white">{{ dish.name }}</h1>
+            <a href="{% url 'restaurant:dish-delete' pk=dish.id %}" class="btn btn-danger link-to-page">
+                Delete
+              </a>
+              <a href="{% url 'restaurant:dish-update' pk=dish.id %}" class="btn btn-secondary link-to-page">
+                Update
+              </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+<style>
+.dish_info {
+  padding-left: 200px;
+    font-family: Georgia, serif;
+}
+</style>
+
+<div class="dish_info">
+  <h3>Dish type</h3>
+    <p>
+      {{ dish.dish_type.name }}
+    </p>
   <h3>Description</h3>
     <p>
     {{ dish.description }}
@@ -24,7 +48,7 @@
       </a>
     {% else %}
       <a href="{% url 'restaurant:toggle-dish-assign' pk=dish.id %}" class="btn btn-success link-to-page">
-        Assign me from this dish
+        Assign me to this dish
       </a>
     {% endif %}
   </h3>
@@ -37,4 +61,6 @@
       </li>
     {% endfor %}
   </ul>
+</div>
+
 {% endblock %}
