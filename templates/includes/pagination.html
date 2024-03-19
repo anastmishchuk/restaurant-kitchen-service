@@ -1,28 +1,9 @@
-{#{% load query_transform %}#}
-{#{% if is_paginated %}#}
-{#  <ul class="pagination">#}
-{#    {% if page_obj.has_previous %}#}
-{#      <li class="page-item">#}
-{#        <a class="page-link" href="?{% query_transform request page=page_obj.previous_page_number %}">prev</a>#}
-{#      </li>#}
-{#    {% endif %}#}
-{#    <li class="page-item active">#}
-{#      <span class="page-link">{{ page_obj.number }} of {{ paginator.num_pages }}</span>#}
-{#    </li>#}
-{#    {% if page_obj.has_next %}#}
-{#      <li class="page-item">#}
-{#        <a class="page-link" href="?{% query_transform request page=page_obj.next_page_number %}">next</a>#}
-{#      </li>#}
-{#    {% endif %}#}
-{#  </ul>#}
-{#{% endif %}#}
-
-
 <link id="pagestyle" href="{{ ASSETS_ROOT }}/css/material-kit.css?v=3.0.0" rel="stylesheet" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 {% load query_transform %}
 {% if is_paginated %}
-  <section class="py-7">
+  <section class="py-1">
     <div class="container">
       <div class="row justify-space-between py-2">
         <div class="col-lg-4 mx-auto">
@@ -50,4 +31,3 @@
     </div>
   </section>
 {% endif %}
-
