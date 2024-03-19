@@ -14,6 +14,9 @@ class DishForm(forms.ModelForm):
     class Meta:
         model = Dish
         fields = "__all__"
+        widgets = {
+            "description": forms.Textarea(attrs={"rows": 1, "cols": 30}),
+        }
 
 
 class CookCreationForm(UserCreationForm):
@@ -22,6 +25,7 @@ class CookCreationForm(UserCreationForm):
         fields = UserCreationForm.Meta.fields + (
             "first_name",
             "last_name",
+            "email",
             "years_of_experience",
         )
 
