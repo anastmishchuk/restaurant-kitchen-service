@@ -1,12 +1,41 @@
-{% extends "base.html" %}
+{% extends "layouts/base.html" %}
 {% load crispy_forms_filters %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
 {% block content %}
-  <h1>{{ object|yesno:"Update,Create" }} dish type</h1>
-  <form action="" method="post" novalidate>
-    {% csrf_token %}
-    {{ form|crispy }}
+  <header class="bg-gradient-dark">
+    <div class="page-header" style="background-image: url('{{ ASSETS_ROOT }}/img/dish_types.jpg'); min-height: 25vh;">
+      <span class="mask bg-gradient-dark opacity-6"></span>
+        <div class="container">
+          <div class="row justify-content-center">
+          </div>
+        </div>
+    </div>
+  </header>
 
-    <input type="submit" value="Submit" class="btn btn-primary">
-  </form>
+<section>
+  <div class="container py-4">
+    <div class="row">
+      <div class="col-lg-7 mx-auto d-flex justify-content-center flex-column" style="text-align:center">
+        <h2 class="text-grey">{{ object|yesno:"Update,Create" }} dish type</h2>
+        <form role="form" method="post" autocomplete="off">
+          <div class="card-body">
+            <div class="row justify-content-center">
+              <div class="col-md-3">
+                <div class="input-group input-group-dynamic mb-4">
+                  {% csrf_token %}
+                  {{ form|crispy }}
+                </div>
+              </div>
+            </div>
+            <input type="submit" value="Submit" class="btn btn-primary mr-2">
+            <a href="{% url 'restaurant:dish-type-list' %}" class="btn btn-secondary">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock %}
