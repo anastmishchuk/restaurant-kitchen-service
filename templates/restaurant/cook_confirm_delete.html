@@ -1,11 +1,40 @@
-{% extends "base.html" %}
+{% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
 {% block content %}
-  <h1>Delete cook?</h1>
-  <form action="" method="post">
-    {% csrf_token %}
+  <header class="bg-gradient-dark">
+    <div class="page-header" style="background-image: url('{{ ASSETS_ROOT }}/img/cook_list.jpg'); min-height: 25vh;">
+      <span class="mask bg-gradient-dark opacity-6"></span>
+        <div class="container">
+          <div class="row justify-content-center">
+          </div>
+        </div>
+    </div>
+  </header>
 
-    <input type="submit" value="Yes" class="btn btn-danger">
-    <a href="{% url 'restaurant:cook-list' %}" class="btn btn-secondary">Cancel</a>
-  </form>
+<section>
+  <div class="container py-4">
+    <div class="row">
+      <div class="col-lg-7 mx-auto d-flex justify-content-center flex-column" style="text-align:center">
+        <h2 class="text-grey">Delete cook - {{ cook.username }}?</h2>
+        <form role="form" method="post" autocomplete="off">
+          <div class="card-body">
+            <div class="row justify-content-center">
+              <div class="col-md-3">
+                <div class="input-group input-group-dynamic mb-4">
+                  {% csrf_token %}
+                </div>
+              </div>
+            </div>
+            <input type="submit" value="Submit" class="btn btn-danger mr-2">
+            <a href="{% url 'restaurant:cook-list' %}" class="btn btn-secondary">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock %}

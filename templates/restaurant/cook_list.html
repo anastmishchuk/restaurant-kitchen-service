@@ -1,35 +1,72 @@
-{% extends "base.html" %}
+{% extends "layouts/base.html" %}
 {% load crispy_forms_filters %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
 {% block content %}
-  <h1>
-    Cook List
-    <a href="{% url 'restaurant:cook-create' %}" class="btn btn-primary link-to-page">
-      Create
-    </a>
-  </h1>
+
+    <header class="bg-gradient-dark">
+    <div class="page-header" style="background-image: url('{{ ASSETS_ROOT }}/img/cook_list.jpg'); min-height: 50vh;">
+      <span class="mask bg-gradient-dark opacity-6"></span>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center mx-auto my-auto">
+            <h1 class="text-white">Cook list</h1>
+            <a href="{% url 'restaurant:cook-create' %}" class="btn btn-primary link-to-page">Create</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
   {% include "includes/search_form.html" %}
-  <br>
+
   {% if cook_list %}
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>Years of experience</th>
-      </tr>
-    {% for cook in cook_list %}
-      <tr>
-        <td>{{ cook.id }}</td>
-        <td><a href="{{ cook.get_absolute_url }}">{{ cook.username }} {% if user == cook %} (Me){% endif %}</a></td>
-        <td>{{ cook.first_name }}</td>
-        <td>{{ cook.last_name }}</td>
-        <td>{{ cook.years_of_experience }}</td>
-      </tr>
-    {% endfor %}
-    </table>
-    {% else %}
+    <div class="card-body p-0">
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+          <div class="table-responsive">
+            <div class="customer-scroll" style="height:auto;position:relative;">
+              <table class="table table-hover m-b-0" style="table-layout: auto;">
+                <thead>
+                  <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Username <a class="help" data-toggle="popover"><i class="feather icon-help-circle f-16"></i></a></span></th>
+                    <th><span>First name <a class="help" data-toggle="popover"><i class="feather icon-help-circle f-16"></i></a></span></th>
+                    <th><span>Last name<a class="help" data-toggle="popover"><i class="feather icon-help-circle f-16"></i></a></span></th>
+                    <th><span>Years of experience<a class="help" data-toggle="popover"><i class="feather icon-help-circle f-16"></i></a></span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for cook in cook_list %}
+                  <tr>
+                    <td>
+                      {{ cook.id }}
+                    </td>
+                    <td>
+                      <a href="{{ cook.get_absolute_url }}">{{ cook.username }} {% if user == cook %} (Me){% endif %}</a>
+                    </td>
+                    <td>
+                      {{ cook.first_name }}
+                    </td>
+                    <td>
+                      {{ cook.last_name }}
+                    </td>
+                    <td>
+                      {{ cook.years_of_experience }}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  {% else %}
       <p>There are no cooks in the restaurant.</p>
-    {% endif %}
+  {% endif %}
 {% endblock %}

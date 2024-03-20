@@ -1,34 +1,68 @@
-{% extends "base.html" %}
+{% extends "layouts/base.html" %}
 {% load crispy_forms_filters %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
 
 {% block content %}
-  <h1>
-    Dish list
-    <a href="{% url 'restaurant:dish-create' %}" class="btn btn-primary link-to-page">
-      Create
-    </a>
-  </h1>
-  {% include "includes/search_form.html" %}
-  <br>
-  {% if dish_list %}
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Dish type</th>
-      </tr>
-    {% for dish in dish_list %}
-      <tr>
-        <td>{{ dish.id }}</td>
-        <td><a href="{{ dish.get_absolute_url }}">{{ dish.name }}</a></td>
-        <td>{{ dish.price }}</td>
-        <td>{{ dish.dish_type }}</td>
-      </tr>
-    {% endfor %}
 
-    </table>
+    <header class="bg-gradient-dark">
+    <div class="page-header" style="background-image: url('{{ ASSETS_ROOT }}/img/dish_list.jpg'); min-height: 50vh;">
+      <span class="mask bg-gradient-dark opacity-6"></span>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center mx-auto my-auto">
+            <h1 class="text-white">Dish list</h1>
+            <a href="{% url 'restaurant:dish-create' %}" class="btn btn-primary link-to-page">Create</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  {% include "includes/search_form.html" %}
+
+  {% if dish_list %}
+    <div class="card-body p-0">
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+          <div class="table-responsive">
+            <div class="customer-scroll" style="height:auto;position:relative;">
+              <table class="table table-hover m-b-0" style="table-layout: auto;">
+                <thead>
+                  <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Name<a class="help" data-toggle="popover"><i class="feather icon-help-circle f-16"></i></a></span></th>
+                    <th><span>Price<a class="help" data-toggle="popover"><i class="feather icon-help-circle f-16"></i></a></span></th>
+                    <th><span>Dish type<a class="help" data-toggle="popover"><i class="feather icon-help-circle f-16"></i></a></span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for dish in dish_list %}
+                  <tr>
+                    <td>
+                      {{ dish.id }}
+                    </td>
+                    <td>
+                      <a href="{{ dish.get_absolute_url }}">{{ dish.name }}</a>
+                    </td>
+                    <td>
+                      {{ dish.price }}
+                    </td>
+                    <td>
+                      {{ dish.dish_type }}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   {% else %}
-    <p>There are no dishes in restaurant</p>
+      <p>There are no dishes in the restaurant.</p>
   {% endif %}
 {% endblock %}
