@@ -15,7 +15,8 @@ from restaurant.views import (
     CookDetailView,
     CookCreateView,
     CookUpdateView,
-    CookDeleteView, toggle_assign_to_dish,
+    CookDeleteView,
+    ToggleAssignToDishView,
 )
 
 
@@ -68,7 +69,7 @@ urlpatterns = [
     ),
     path(
         "dishes/<int:pk>/toggle-assign/",
-        toggle_assign_to_dish,
+        ToggleAssignToDishView.as_view(),
         name="toggle-dish-assign",
     ),
     path(
