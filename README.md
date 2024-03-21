@@ -9,14 +9,12 @@ DB structure:
 Pages images:
 
 1. Registration page 
-
 ![register](https://github.com/anastmishchuk/restaurant-kitchen-service/assets/126790636/6bb53e5e-b204-4f51-9695-f2c81bc3c5b9)
 
 2. Login page
 ![log-in](https://github.com/anastmishchuk/restaurant-kitchen-service/assets/126790636/45c099c0-2d7d-4eaa-930e-be5be402bda0)
 
 3. Logout page 
-
 ![logged_out](https://github.com/anastmishchuk/restaurant-kitchen-service/assets/126790636/bd0d3d6b-9c71-4569-bdf9-f82fec631bcd)
 
 4. Main page
@@ -26,14 +24,12 @@ Pages images:
 ![dish_type_list](https://github.com/anastmishchuk/restaurant-kitchen-service/assets/126790636/5ce456a3-2e5f-426a-92aa-2cf76c507887)
 
 6. Create new dish type 
-
 ![dish_type_create](https://github.com/anastmishchuk/restaurant-kitchen-service/assets/126790636/5de92afc-e136-400f-8c48-c3e2e25a9154)
 
 7. Update dish type 
 ![dish_type_update](https://github.com/anastmishchuk/restaurant-kitchen-service/assets/126790636/e93bf07f-17a3-47c5-94d5-195675837b5f)
 
 8. Delete dish type
-
 ![dish_type_delete](https://github.com/anastmishchuk/restaurant-kitchen-service/assets/126790636/3a687a15-513d-4c0a-850d-4469d25447ed)
 
 9. Dish list page
@@ -44,7 +40,6 @@ Pages images:
 
 
 11. Create new dish
-
 ![dish_create](https://github.com/anastmishchuk/restaurant-kitchen-service/assets/126790636/ec2495ba-1ca6-4c64-bcf1-2114cc119309)
 
 12. Update dish 
@@ -59,7 +54,6 @@ Pages images:
 ![dish_detail2](https://github.com/anastmishchuk/restaurant-kitchen-service/assets/126790636/51790d56-fc58-49da-90bb-3fcf650f6437)
 
 15. Cook list
-
 ![cook_list](https://github.com/anastmishchuk/restaurant-kitchen-service/assets/126790636/a29bda87-8007-4521-9006-4b6bc729abbf)
 
 16. Create new cook
