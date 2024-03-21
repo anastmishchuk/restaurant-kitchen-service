@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views import generic
+from django.views import generic, View
 
 from restaurant.forms import DishForm, CookCreationForm, DishTypeSearchForm, DishSearchForm, CookSearchForm, SignUpForm
 from restaurant.models import Cook, Dish, DishType
@@ -161,23 +161,27 @@ class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("restaurant:cook-list")
 
 
-@login_required
-def toggle_assign_to_dish(request, pk):
-    cook = Cook.objects.get(id=request.user.id)
-    if (
-        Dish.objects.get(id=pk) in cook.dishes.all()
-    ):
-        cook.dishes.remove(pk)
-    else:
-        cook.dishes.add(pk)
-    return HttpResponseRedirect(reverse_lazy("restaurant:dish-detail", args=[pk]))
+class ToggleAssignToDishView(LoginRequiredMixin, View):
+    def get(self, request, pk):
+        return self.post(request, pk)
+
+    def post(self, request, pk):
+        cook = Cook.objects.get(id=request.user.id)
+        if Dish.objects.get(id=pk) in cook.dishes.all():
+            cook.dishes.remove(pk)
+        else:
+            cook.dishes.add(pk)
+        return HttpResponseRedirect(reverse_lazy("restaurant:dish-detail", args=[pk]))
 
 
-def register_user(request):
-    msg = None
-    success = False
+class RegisterUserView(View):
+    def get(self, request):
+        form = SignUpForm()
+        return render(request, "registration/register.html", {"form": form})
 
-    if request.method == "POST":
+    def post(self, request):
+        msg = None
+        success = False
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
@@ -185,15 +189,46 @@ def register_user(request):
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
 
-            msg = 'Account created successfully.'
+            msg = "Account created successfully."
             success = True
-
-            # return redirect("/login/")
-
         else:
-            msg = 'Form is not valid'
-    else:
-        form = SignUpForm()
+            msg = "Form is not valid"
+        return render(request, "registration/register.html", {"form": form, "msg": msg, "success": success})
 
-    return render(request, "registration/register.html",
-                  {"form": form, "msg": msg, "success": success})
+
+# @login_required
+# def toggle_assign_to_dish(request, pk):
+#     cook = Cook.objects.get(id=request.user.id)
+#     if (
+#         Dish.objects.get(id=pk) in cook.dishes.all()
+#     ):
+#         cook.dishes.remove(pk)
+#     else:
+#         cook.dishes.add(pk)
+#     return HttpResponseRedirect(reverse_lazy("restaurant:dish-detail", args=[pk]))
+#
+#
+# def register_user(request):
+#     msg = None
+#     success = False
+#
+#     if request.method == "POST":
+#         form = SignUpForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             username = form.cleaned_data.get("username")
+#             raw_password = form.cleaned_data.get("password1")
+#             user = authenticate(username=username, password=raw_password)
+#
+#             msg = 'Account created successfully.'
+#             success = True
+#
+#             # return redirect("/login/")
+#
+#         else:
+#             msg = 'Form is not valid'
+#     else:
+#         form = SignUpForm()
+#
+#     return render(request, "registration/register.html",
+#                   {"form": form, "msg": msg, "success": success})
