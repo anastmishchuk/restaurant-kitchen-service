@@ -22,7 +22,7 @@ python manage.py runserver #starts Django Server
 ## Features
 
 * Registration & authentication functionality for Cook/User
-* Managing dishes, cooks & dish types directly from website interfacer
+* Managing dishes, cooks & dish types directly from website interface
 * Admin panel for advanced managing
 
 ## Demo
