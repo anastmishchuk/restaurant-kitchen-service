@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 
-import dotenv
 import dj_database_url
 from pathlib import Path
 
@@ -23,16 +22,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
-
-SECRET_KEY = os.environ["SECRET_KEY"]
+SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
+DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = ["127.0.0.1"]
+
+SECURE_HSTS_SECONDS = 600
+
+SECURE_SSL_REDIRECT = True
+
+SESSION_COOKIE_SECURE = True
 
 
 # Application definition
