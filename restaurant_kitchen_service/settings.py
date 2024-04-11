@@ -27,7 +27,7 @@ SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = ["127.0.0.1", "restaurant-kitchen-service-6b1n.onrender.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "restaurant-kitchen-service-xt9e.onrender.com"]
 
 # SECURE_HSTS_SECONDS = 600
 #
