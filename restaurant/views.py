@@ -1,5 +1,3 @@
-import asyncio
-
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -9,7 +7,6 @@ from django.urls import reverse_lazy
 from django.views import generic, View
 
 
-from restaurant.http_response import AsyncStreamingHttpResponse
 from restaurant.forms import DishForm, CookCreationForm, DishTypeSearchForm, DishSearchForm, CookSearchForm, SignUpForm
 from restaurant.models import Cook, Dish, DishType
 
@@ -198,12 +195,3 @@ class RegisterUserView(View):
         else:
             msg = "Form is not valid"
         return render(request, "registration/register.html", {"form": form, "msg": msg, "success": success})
-
-
-async def some_view(request):
-    async def content_generator():
-        for i in range(100):
-            yield f'{i}\n'
-            await asyncio.sleep(1)
-
-    return AsyncStreamingHttpResponse(content_generator())
