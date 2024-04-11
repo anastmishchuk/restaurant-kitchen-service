@@ -29,11 +29,11 @@ DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = ["127.0.0.1", "restaurant-kitchen-service-6b1n.onrender.com"]
 
-SECURE_HSTS_SECONDS = 600
-
-SECURE_SSL_REDIRECT = True
-
-SESSION_COOKIE_SECURE = True
+# SECURE_HSTS_SECONDS = 600
+#
+# SECURE_SSL_REDIRECT = True
+#
+# SESSION_COOKIE_SECURE = True
 
 
 # Application definition
