@@ -19,6 +19,11 @@ pip install -r requirements.txt
 python manage.py runserver #starts Django Server
 ```
 
+## Test user
+login: user
+password: user12345
+
+
 ## Features
 
 * Registration & authentication functionality for Cook/User
